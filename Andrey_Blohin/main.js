@@ -1,2 +1,2 @@
-var name = "Блохин Андрей Геннадьевич";
-console.log(name.toUpperCase(), " - ", name.length);
+var n = "Блохин Андрей Геннадьевич";
+console.log(n.toUpperCase(), " - ", n.length);
