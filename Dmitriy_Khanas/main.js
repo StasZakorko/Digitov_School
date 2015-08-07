@@ -7,7 +7,7 @@ if ( email_pat.test(email) ) {
 
 
 var pass = prompt("Please enter your pass", "pass");
-var pass_l = /^[0-9]{1,6}$/i;
+var pass_l = /^[0-9]|[a-z]{1,6}$/i;
 var pass_m = /^[a-z0-9]{1,8}$/i;
 var pass_c = /^[a-z0-9]{8,}$/i;
 if (pass_l.test(pass)) { alert('l') } 
