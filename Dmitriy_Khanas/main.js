@@ -13,7 +13,7 @@ var pass_c = /^[a-z0-9]{8,}$/i;
 if (pass_l.test(pass)) { alert('l') } 
 else if (pass_m.test(pass)) { alert('m') }
 else if (pass_c.test(pass)) { alert('c') }
-else { alert('pass incorrect') }
+else { alert('pass incorrect') } 
 
 //1) Написать регулярное выражение для валидации e-mail. Пользователь вводит через модальное окно prompt() и обрабатывает эго с выводом в консоль:
 //    - true или false (правильно введен e-mail или нет)
