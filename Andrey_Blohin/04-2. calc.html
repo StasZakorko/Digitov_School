@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+        rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="04-2. calc.css">
+    </head>
+    
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-4">
+                    <h1 class="text-muted">&nbsp;Calculator</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-4 text-left">
+                    <form role="form" class="text-left">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" onkeypress="return false" onkeydown="return false"
+                                id="data-entry-form" value="0">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-4">
+                    <div class="btn-toolbar" role="toolbar">
+                        <div class="btn-group btn-group-lg">
+                            <a type="button" class="btn btn-default" id="plus-or-minus-btn" onclick="getPlusOrMinus()">&nbsp;+ / -</a>
+                            <a type="button" class="btn btn-default" id="backspace-btn" onclick="getBackSpace()">&nbsp; &lt;- &nbsp;</a>
+                        </div>
+                        <div class="btn-group btn-group-lg">
+                            <a type="button" class="btn btn-default" id="divide-btn" onclick="getUserInput('/')">/&nbsp;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-4">
+                    <div class="btn-toolbar" role="toolbar">
+                        <div class="btn-group btn-group-lg">
+                            <a type="button" class="btn btn-default" id="seven-btn" onclick="getUserInput(7)">7</a>
+                            <a type="button" class="btn btn-default" id="eight-btn" onclick="getUserInput(8)">8</a>
+                            <a type="button" class="btn btn-default" id="nine-btn" onclick="getUserInput(9)">9</a>
+                        </div>
+                        <div class="btn-group btn-group-lg">
+                            <a type="button" class="btn btn-default" id="multiply-btn" onclick="getUserInput('*')">&nbsp;*</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-4">
+                    <div class="btn-toolbar" role="toolbar">
+                        <div class="btn-group btn-group-lg">
+                            <a type="button" class="btn btn-default" id="four-btn" onclick="getUserInput(4)">4</a>
+                            <a type="button" class="btn btn-default" id="five-btn" onclick="getUserInput(5)">5</a>
+                            <a type="button" class="btn btn-default" id="six-btn" onclick="getUserInput(6)">6</a>
+                        </div>
+                        <div class="btn-group btn-group-lg">
+                            <a type="button" class="btn btn-default" id="minus-btn" onclick="getUserInput('-')">&nbsp;-</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-4">
+                    <div class="btn-toolbar" role="toolbar">
+                        <div class="btn-group btn-group-lg">
+                            <a type="button" class="btn btn-default" id="one-btn" onclick="getUserInput(1)">1</a>
+                            <a type="button" class="btn btn-default" id="two-btn" onclick="getUserInput(2)">2</a>
+                            <a type="button" class="btn btn-default" id="three-btn" onclick="getUserInput(3)">3</a>
+                        </div>
+                        <div class="btn-group btn-group-lg">
+                            <a type="button" class="btn btn-default" id="plus-btn" onclick="getUserInput('+')">+</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-4">
+                    <div class="btn-toolbar" role="toolbar">
+                        <div class="btn-group btn-group-lg">
+                            <a type="button" class="btn btn-default" id="clear-btn" onclick="clearDataEntryForm()">C</a>
+                            <a type="button" class="btn btn-default" id="zero-btn" onclick="getUserInput(0)">0</a>
+                            <a type="button" class="btn btn-default" id="dot-btn" onclick="getUserInput('.')">.&nbsp;</a>
+                        </div>
+                        <div class="btn-group">
+                            <a type="button" class="btn btn-default btn-lg" id="calculate-btn" onclick="calculate()">=</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="04-2. calc.js" type="text/javascript"></script>
+    </body>
+</html>
