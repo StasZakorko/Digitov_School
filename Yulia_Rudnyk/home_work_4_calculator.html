@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--
+    написать функцию — калькулятор!
+    Задача:
+    - пользователь имеет возможность ввести два значения, и знак операции.
+    (можете использовать prompt, либо input у кого html не вызывает трудностей)
+    - по нажатию кнопки « = » или «ОК» модального окна , получить решение, и вывести пользователю
+    - не забываем что на 0 делить нельзя.
+    -->
+    <style>
+        .calculator input[type="number"] {
+            width:70px;
+        }
+    </style>
+</head>
+<body>
+<!-- form for getting data to process-->
+<div class="calculator">
+    <form id="calculator" name="calculator">
+        <b>Insert expression to solve</b><br>
+        <label for="first_number">first number</label>
+        <input type="number" id="first_number" name="first_number"/><br>
+        <label for="operator">operator(+ - * /)</label>
+        <input type="text" id="operator" name="operator" size="8"/><br>
+        <label for="second_number">second number</label>
+        <input type="number" id="second_number" name="second_number"/><br>
+        press to calculate <input type="button" id="submit" value="=" onclick="calculate()"/>
+        <input type="number" id="result" name="result">
+
+    </form>
+</div>
+<script>
+    // calculate function is called on '=' being pressed
+    function calculate() {
+        // collects data from form fields
+        var firstNumber = parseInt(document.getElementById("calculator").elements.namedItem("first_number").value);
+        var operatorSign = document.getElementById("calculator").elements.namedItem("operator").value;
+        var secondNumber = parseInt(document.getElementById("calculator").elements.namedItem("second_number").value);
+        var result = 0;
+        // checks for operator sign and redirects to corresponding function
+        if (operatorSign == '+') {
+            result = add(firstNumber, secondNumber);
+        } else if (operatorSign == '-') {
+            result = substract(firstNumber, secondNumber);
+        } else if (operatorSign == '*') {
+            result = multiply(firstNumber, secondNumber);
+        } else if (operatorSign == '/') {
+            if (secondNumber == 0) {
+                alert("You cant delete by 0");
+            }
+            result = divide(firstNumber, secondNumber);
+        }
+        document.getElementById('result').value = result;
+    }
+
+    function add(numberOne, numberTwo) {
+        return numberOne + numberTwo
+    }
+
+    function substract(numberOne, numberTwo) {
+        return numberOne - numberTwo
+    }
+
+    function multiply(numberOne, numberTwo) {
+        return numberOne * numberTwo
+    }
+
+    function divide(numberOne, numberTwo) {
+        return numberOne / numberTwo
+    }
+
+</script>
+
+</body>
+</html>

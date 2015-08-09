@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--
+    напишем маленькую игру «Угадай число»
+    Задача:
+    написать скрипт, который при загрузке страницы генерирует число от 0 до 100
+    (воспользуйтесь методом Math.random( ), кто не разберется, используйте модальное окно, для ввода числа пользователем).
+    и вы должны это число угадать, вызывается модальное окно в котором пользователь вводит число,
+    если оно не верно, то всплывает подсказка, больше это число от загаданного, или меньше.
+    Если же пользователь угадал, то сообщения о победе в котором присутствует информация
+    о колличестве попыток, потраченных на угадывание.
+    -->
+</head>
+<body>
+<script>
+    var totalTries = 1; // start from 0 as user will make at least one guess
+    // random number from 0 to 100. use floor as random returns float number
+    var randomNumber = Math.floor(Math.random() * 100);
+    // use next alert to know what is a generated number
+    alert('correct number is ' + randomNumber);
+    var userGuess = getUserNumber();  // first user number to start cycle
+    while (userGuess != randomNumber){
+        totalTries += 1;
+        if (userGuess < randomNumber) {
+            alert('Your number is smaller than correct number');
+        } else if (userGuess > randomNumber) {
+            alert('Your number is bigger than correct number');
+        }
+        userGuess = getUserNumber();  // again ask user to insert number
+    }
+    alert("you have guessed a number. Number of tries is " + totalTries);
+
+    function getUserNumber(){
+        return prompt("Insert number from 0 to 100");
+    }
+
+</script>
+</body>
+</html>
