@@ -34,10 +34,6 @@ function getUserInput(userInput){
 		} else if ( (dataEntryForm.value).match(/[\/\*\-\+]$/) && /[\/\*\-\+]/.test(userInput) ){
 			dataEntryForm.value = (dataEntryForm.value).replace(/[\/\*\-\+]$/, userInput);
 
-		//Отлов попытки разделить на ноль
-		/*} else if ( /\/$/.test(dataEntryForm.value) && /0/.test(userInput) ){
-			alert("На ноль делить нельзя!");*/
-
 		//Если пользователь пытается ввести "." или "," несколько раз подряд после знака операции
 		} else if ( (dataEntryForm.value).match(/[\/\*\-\+]$/) && /[\.\,]/.test(userInput) ){
 			dataEntryForm.value = (dataEntryForm.value).replace(/[\.\,]$/, "0.");
@@ -83,6 +79,8 @@ function getPlusOrMinus(){
 }
 
 function getBackSpace(){
+	// Посимвольное удаление справа налево
+
 	var dataEntryForm = document.getElementById("data-entry-form");
 	dataEntryForm.value = (dataEntryForm.value).substring(0, dataEntryForm.value.length-1);
 	if (dataEntryForm.value === ""){dataEntryForm.value = "0";}
@@ -92,7 +90,7 @@ function calculate(){
 	//Расчет
 
 	var dataEntryForm = document.getElementById("data-entry-form");
-	if ( !(/0[\.\,]{0,1}0*$/.test(dataEntryForm.value)) ){
+	if ( !(/(\/0*[\.\,]0*[^1-9]$)|(\/0*[^1-9]$)/.test(dataEntryForm.value)) ){
 		var num = (dataEntryForm.value).match(/(?:\d+(?:\.|,)\d+|\d+)/g);
 
 		//match-чим операцию с конца строки, ибо с начала строки может стоять минус
@@ -112,7 +110,7 @@ function calculate(){
 $(document).keyup(function(event){
 	//Реализация горячих клавиш. Код начала функции мне неведом, но работает)))))
 
-	switch ( event.keyCode){
+	switch ( event.keyCode ){
 		case 8: getBackSpace(); break;			//Backspace
 		case 96: getUserInput("0"); break;
 		case 97: getUserInput("1"); break;
