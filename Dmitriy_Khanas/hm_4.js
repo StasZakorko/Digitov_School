@@ -39,10 +39,16 @@ function Guess(){
 
 function Calc() {
     var x = parseFloat(document.getElementById("number1").value);
+    document.getElementById('number1').onkeypress = function (e) {
+    return !(/[А-Яа-яA-Za-z ]/.test(String.fromCharCode(e.charCode)));
+        }
     if (x != document.getElementById("number1").value){
             document.getElementById("number1").value = "value error";
         }
     var y = parseFloat(document.getElementById("number2").value);
+    document.getElementById('number2').onkeypress = function (e) {
+    return !(/[А-Яа-яA-Za-z ]/.test(String.fromCharCode(e.charCode)));
+        }
     if (y != document.getElementById("number2").value){
         document.getElementById("number2").value = "value error";
         }
