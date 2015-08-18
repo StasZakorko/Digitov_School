@@ -6,6 +6,7 @@
 
 function sSort(a, b) { return a - b }	//Функция сортировки
 var usrEntry = prompt("Введите последовательность через запятую:").match(/\d+\.\d+|\d+/g); //Получение массива цифр строкового типа из пользовательского ввода
-usrEntry.forEach(function(item, i){ usrEntry[i] = +item }); //Преобразование элементов массива строкового типа в числовой тип
-alert(usrEntry.sort(sSort));	//Сортировка массива и его вывод пользователю
-//alert(typeof usrEntry[0]); //Для проверки типа
+var result = (usrEntry.sort(sSort)).filter(function(item, i){ if (usrEntry[i-1] !== usrEntry[i]) return usrEntry[i] }); //Сортируем и удаляем дубли
+result.forEach(function(item, i){ result[i] = +item }); //Преобразование элементов массива строкового типа в числовой тип
+alert(result); // Вывод пользователю
+//alert(typeof result[0]); //Для проверки типа
