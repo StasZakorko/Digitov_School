@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!--
+    Создайте два пустых объекта car и car2.
+    Добавьте в них свойство model со значением марки авто.
+    Добавьте свойство engine со значением объема двигателя, и значение year с годом выпуска
+    Поменяйте значение model в одном из объектов на другую марку.
+    Удалите свойство year из обоих объектов используя функцию удаления через this.
+    Выведите в консоль марку и объем кажюого из автомобилей используя функцию вывода, тоже через this
+    -->
+</head>
+<body>
+<script>
+    // Создайте два пустых объекта car и car2.
+    var car = {};
+    var car2 = {};
+
+    //Добавьте в них свойство model со значением марки авто.
+    car['model'] = "BMW";
+    car2['model'] = "Mercedes";
+
+    //Добавьте свойство engine со значением объема двигателя, и значение year с годом выпуска
+    car['engine'] = 300;
+    car2['engine'] = 300;
+    car['year'] = 2005;
+    car2['year'] = 2003;
+
+    //Поменяйте значение model в одном из объектов на другую марку.
+    car['model'] = "Porshe";
+
+    // проверить результат
+    console.log(car);
+    console.log(car2);
+
+    //Удалите свойство year из обоих объектов используя функцию удаления через this.
+    deleteYear.call(car);
+    deleteYear.call(car2);
+
+    //Выведите в консоль марку и объем кажюого из автомобилей используя функцию вывода, тоже через this
+    showObjectInfo.call(car);
+    showObjectInfo.call(car2);
+
+    function deleteYear() {
+        delete this.year
+    }
+
+    function showObjectInfo() {
+        console.log(this);
+    }
+
+</script>
+</body>
+</html>
