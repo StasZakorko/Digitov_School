@@ -17,12 +17,8 @@
 <body>
 <div>Table 11x11</div>
 <input type="button" value="create table" onclick="table()"/>
-<input type="button" value="populate table" onclick="populateTable()"/>
-<input type="button" value="check intersections" onclick="checkIntersection()"/>
 
 <script>
-//    1) Создать в HTML документе разметку (таблицей или div`ом) чтобы результатом
-//    отображения была твблица в 11х11 (рядки/столбцы)
 
     function createTable(rows, cells) {
         var table = document.createElement('table');  // создать новый элемент таблицу
@@ -41,16 +37,11 @@
         return table;
     }
 
-    function table() {
-        var table = createTable(11, 11);
-        document.body.appendChild(table);  // добавить в тело странцы таблицу
-    }
-
-//    2) 1 рядок - хэд таблицы, в нем начиная со второго столбца идут следующие ячейки:
-//    true, false, string, number, object, array, null, undefined, NAN, 0
-//    соответственно в таком же порядке делаем и первый столбец
-
-    var values = ["true", "false", "string", "number", "object", "array", "null", "undefined", "NAN", "0"];
+    var tableType = "==";  // тип проверки по умолчанию
+    var emptyArray = [];
+    var varNull = null;
+    var nan = Math.sqrt(-1);
+    var values = [true, false, "0", 1, {}, emptyArray, varNull, undefined, nan, 0];
 
     function insertHeader() {
         // вставить значения для ячеек хедера таблицы
@@ -59,7 +50,6 @@
         }
     }
 
-
     function insertFirstColumn() {
         // вставить значения для ячеек первого столбца таблицы
         for (var i = 1; i < values.length+1; i++) {
@@ -67,15 +57,25 @@
         }
     }
 
+    function changeTableType() {
+        if (document.getElementById("00").innerHTML) { // если есть вид проверки
+            tableType = document.getElementById("00").childNodes[0].innerHTML;  // получить вид проверки и обновить ссылку
+            if (tableType == "==") {
+                document.getElementById("00").childNodes[0].innerHTML = "===";
+            } else if (tableType == "===") {
+                document.getElementById("00").childNodes[0].innerHTML = "==";
+            }
+            checkIntersection();  // при клике на вид проверки - обновить таблицу выполнив проверку
+        } else {  // если нет вила проверки - создать (при создании таблицы)
+            document.getElementById("00").innerHTML = '<a href="#" onclick="changeTableType()" style="text-decoration: none">===</a>';
+        }
+    }
 
     function populateTable() {
+        changeTableType();
         insertHeader();
         insertFirstColumn();
     }
-
-//    3) написать скрипт, который будет приравнивать эти значения друг с другом (==)
-//    и выводить в таблицу, в ячейки их пересечения
-//    результат сравнения (true/false)
 
     function checkIntersection() {
         for (var i = 1; i < values.length+1; i++) {  // перебор строк таблицы
@@ -83,14 +83,29 @@
             for (var j = 1; j < values.length+1; j++) {  // перебор колонок таблицы
                 var headerValue = values[j-1];  // имя колонки
                 var intersectionValue = document.getElementById("" + i + j);  // получаем ячейку пересечения
-                if (columnValue == headerValue) {  // если имя колонки и имя строки одинаковые
-                    intersectionValue.innerHTML = "true";  // в ячейке пересечения запишем true
-                    intersectionValue.style.fontWeight = 'bold';
-                } else {
-                    intersectionValue.innerHTML = "false";
+                if (tableType == "==") {
+                    if (columnValue == headerValue) {  // если имя колонки и имя строки одинаковые
+                        intersectionValue.innerHTML = "<b>true</b>";  // в ячейке пересечения запишем true
+                    } else {
+                        intersectionValue.innerHTML = "false";
+                    }
+                } else if (tableType == "==="){
+                    if (columnValue === headerValue) {  // если имя колонки и имя строки одинаковые
+                        intersectionValue.innerHTML = "<b>true</b>";  // в ячейке пересечения запишем true
+                    } else {
+                        intersectionValue.innerHTML = "false";
+                    }
                 }
+
             }
         }
+    }
+
+    function table() {
+        var table = createTable(11, 11);
+        document.body.appendChild(table);  // добавить в тело странцы таблицу
+        populateTable();
+        checkIntersection();
     }
 
 </script>
