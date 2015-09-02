@@ -12,10 +12,19 @@
     3) написать скрипт, который будет приравнивать эти значения друг с другом (==)
     и выводить в таблицу, в ячейки их пересечения
     результат сравнения (true/false)-->
-
+    <style>
+    a {
+        color: #FF0000;
+        font-weight: bold;
+        font-size: larger;
+    }
+    </style>
 </head>
 <body>
-<div>Table 11x11</div>
+
+
+
+<div>Comparison Table</div>
 <input type="button" value="create table" onclick="table()"/>
 
 <script>
@@ -38,22 +47,31 @@
     }
 
     var tableType = "==";  // тип проверки по умолчанию
-    var emptyArray = [];
-    var varNull = null;
     var nan = Math.sqrt(-1);
-    var values = [true, false, "0", 1, {}, emptyArray, varNull, undefined, nan, 0];
+    var values = [
+        ['true', true],
+        ['false', false],
+        ['"0"', '0'],
+        ['1', 1],
+        ['object', {}],
+        ['array', []],
+        ['null',null],
+        ['undefined', undefined],
+        ['nan', nan],
+        [0, 0]
+    ];
 
     function insertHeader() {
         // вставить значения для ячеек хедера таблицы
         for (var i = 0; i < values.length; i++) {
-            document.getElementById("0"+(i+1)).innerHTML=values[i];
+            document.getElementById("0"+(i+1)).innerHTML=values[i][0];
         }
     }
 
     function insertFirstColumn() {
         // вставить значения для ячеек первого столбца таблицы
         for (var i = 1; i < values.length+1; i++) {
-            document.getElementById(i + "0").innerHTML=values[i-1];
+            document.getElementById(i + "0").innerHTML=values[i-1][0];
         }
     }
 
@@ -79,9 +97,9 @@
 
     function checkIntersection() {
         for (var i = 1; i < values.length+1; i++) {  // перебор строк таблицы
-            var columnValue = values[i-1];  // имя строки (из первого столбца таблицы)
+            var columnValue = values[i-1][1];  // имя строки (из первого столбца таблицы)
             for (var j = 1; j < values.length+1; j++) {  // перебор колонок таблицы
-                var headerValue = values[j-1];  // имя колонки
+                var headerValue = values[j-1][1];  // имя колонки
                 var intersectionValue = document.getElementById("" + i + j);  // получаем ячейку пересечения
                 if (tableType == "==") {
                     if (columnValue == headerValue) {  // если имя колонки и имя строки одинаковые
@@ -96,7 +114,6 @@
                         intersectionValue.innerHTML = "false";
                     }
                 }
-
             }
         }
     }
