@@ -50,7 +50,9 @@
 //    true, false, string, number, object, array, null, undefined, NAN, 0
 //    соответственно в таком же порядке делаем и первый столбец
 
-    var values = ["true", "false", "string", "number", "object", "array", "null", "undefined", "NAN", "0"];
+    var my_nan = Math.sqrt(-1)
+
+    var values = [true, false, "string", 1, {}, [], null, undefined, my_nan, 0];
 
     function insertHeader() {
         // вставить значения для ячеек хедера таблицы
