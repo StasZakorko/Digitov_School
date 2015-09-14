@@ -10,15 +10,13 @@ $(".btn-default").click(function(){
 			.append(
 				$("<div>").addClass("block")
 				.css({
-					"width": "100px",
-					"height": "100px",
+					"width": "50px",
+					"height": "50px",
 					"border": "1px solid #000",
+					"position": "absolute",
 					"background-color": color
 				})
-				.append(
-					$("<span>").addClass("close")
-						.text("X")
-				)
+				.append($("<span>").addClass("close").text("X"))
 			);
 	} else { alert("Выберите цвет.") }
 
@@ -27,13 +25,21 @@ $(".btn-default").click(function(){
 		$("span").parent().remove();
 		color = "";
 	});
+
+	$(document).keydown(function(event){
+		switch (event.keyCode){
+			case 38: $(".block").offset(function(i, pos){ return {top: pos.top - 10, left: pos.left} }); break;
+			case 39: $(".block").offset(function(i, pos){ return {top: pos.top, left: pos.left + 10} }); break;
+			case 40: $(".block").offset(function(i, pos){ return {top: pos.top + 10, left: pos.left} }); break;
+			case 37: $(".block").offset(function(i, pos){ return {top: pos.top, left: pos.left - 10} }); break;
+		}
+	});
 });
 
 /*$("span").click(function(){
 		$("span").parent().remove();
 		color = "";
 	});*/
-
 
 /*
 ======== ВОПРОСЫ =============
