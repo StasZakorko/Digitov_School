@@ -12,7 +12,7 @@ $(document).ready(function() {
             autoPlay: false,  // true or false
             autoPlayDelay: 2,  // delay in seconds
             dots: false,
-            dotsClass : "supreDots"
+            dotsClass : "superDots"
         }, options);
         var make = function () {
             $(this).css('overflow', 'hidden');
@@ -67,6 +67,7 @@ $(document).ready(function() {
                             enableButtons();
                         }
                     );
+
                     if ( $("." + options.dotsClass + " li:first-child").hasClass("active") ){
                         $("." + options.dotsClass + " li.active").removeClass("active").addClass("disabled");
                         $("." + options.dotsClass + " li:last-child").addClass("active").removeClass("disabled");
@@ -89,6 +90,7 @@ $(document).ready(function() {
                             enableButtons();
                         }
                     );
+
                     if ( $("." + options.dotsClass + " li:last-child").hasClass("active") ){
                         $("." + options.dotsClass + " li.active").removeClass("active").addClass("disabled");
                         $("." + options.dotsClass + " li:first-child").addClass("active").removeClass("disabled");
@@ -123,15 +125,47 @@ $(document).ready(function() {
                 }
                 $("." + options.dotsClass + " li:first-child").addClass("active");
             }
+
+            // ОБРАБОТЧИК НАЖАТИЯ НА ТОЧКИ
+            $("." + options.dotsClass + " li").click(function (event){    
+                event.preventDefault();
+                var arr = $("." + options.dotsClass).children();                
+                var posOld = $.inArray( $("." + options.dotsClass + " li.active")[0], arr );
+                $("." + options.dotsClass + " li.active").addClass("disabled").removeClass("active");
+                $(this).addClass("active").removeClass("disabled");                
+                var posNew = $.inArray( $("." + options.dotsClass + " li.active")[0], arr );                
+                deltaPos = posOld - posNew;
+
+                if (deltaPos < 0){
+                    deltaPos *= (-1);
+                    el.animate({left: '-=' + elWidth * deltaPos + 'px'}, 300,
+                        function () {
+                            if ($(this).css('left') == '-' + (elWidth * (options.quantity + elRealQuant)) + 'px') {
+                                $(this).css('left', '-' + elWidth * options.quantity + 'px');
+                            }
+                            enableButtons();
+                        }
+                    ); 
+                } else {
+                    el.animate({left: '+=' + elWidth * deltaPos + 'px'}, 300,
+                        function () {
+                            if ($(this).css('left') == '-' + (elWidth * (options.quantity + elRealQuant)) + 'px') {
+                                $(this).css('left', '-' + elWidth * options.quantity + 'px');
+                            }
+                            enableButtons();
+                        }
+                    ); 
+                }// end if         
+            });            
         };
         return this.each(make);
     };
 });
 
-// leftBtn
-// rightBtn
-// quantity
-// autoPlay (true, false)
-// autoPlayDelay (ms)
-
-
+/*
+=== ВОПРОС ===
+В коде встречается
+ $("." + options.dotsClass + " li").click(function (event){    
+                event.preventDefault();
+Может я забыл, но зачем он здесь нужен? Мы ранее click() без него описывали.
+*/
