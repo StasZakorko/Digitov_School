@@ -46,6 +46,20 @@
         return table;
     }
 
+
+    function table() {
+        var table = createTable(11, 11);
+        document.body.appendChild(table);  // добавить в тело странцы таблицу
+    }
+
+//    2) 1 рядок - хэд таблицы, в нем начиная со второго столбца идут следующие ячейки:
+//    true, false, string, number, object, array, null, undefined, NAN, 0
+//    соответственно в таком же порядке делаем и первый столбец
+
+    var my_nan = Math.sqrt(-1)
+
+    var values = [true, false, "string", 1, {}, [], null, undefined, my_nan, 0];
+
     var tableType = "==";  // тип проверки по умолчанию
     var nan = Math.sqrt(-1);
     var values = [
@@ -60,6 +74,7 @@
         ['nan', nan],
         [0, 0]
     ];
+
 
     function insertHeader() {
         // вставить значения для ячеек хедера таблицы

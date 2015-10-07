@@ -18,7 +18,7 @@ var arr10 = arr11.slice(1);
 
 $(document).ready( function(){
 
-	var table = $("<table/>");		// Создаем таблицу	
+	var table = $("<table/>");		// Создаем таблицу
 
 	//Создаем шапку таблицы
 	var thead = $("<thead/>");		// Шапка таблицы
