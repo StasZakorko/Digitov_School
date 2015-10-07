@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>My slider</title>
+    <link rel="stylesheet" type="text/css" href="mySlider.css"/>
+</head>
+<body>
+
+<div class="slider-wrap">
+    <div class="slider">
+        <ul>
+            <li>
+                <span class="black"></span>
+            </li>
+            <li>
+                <span class="red"></span>
+            </li>
+            <li>
+                <span class="yellow"></span>
+            </li>
+            <li>
+                <span class="blue"></span>
+            </li>
+            <li>
+                <span class="green"></span>
+            </li>
+            <li>
+                <span class="black"></span>
+            </li>
+            <li>
+                <span class="red"></span>
+            </li>
+            <li>
+                <span class="yellow"></span>
+            </li>
+            <li>
+                <span class="blue"></span>
+            </li>
+            <li>
+                <span class="green"></span>
+            </li>
+        </ul>
+    </div>
+    <a href="#" class="slider-arrow leftBtn">&lt;</a>
+    <a href="#" class="slider-arrow rightBtn">&gt;</a>
+</div>
+
+<!--script src="//code.jquery.com/jquery-1.11.3.min.js"></script-->
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="jquery.mySlider.js"></script>
+<script>
+    $(document).ready(function() {
+        $(".slider").mySlider({
+            dots: true,
+            quantity: 4,
+            dotsClass: "dotsAndrey"
+        });
+    });
+
+</script>
+</body>
+</html>
