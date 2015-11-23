@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <!--
+    1) Создать в HTML документе разметку (таблицей или div`ом) чтобы результатом
+    отображения была твблица в 11х11 (рядки/столбцы)
+    2) 1 рядок - хэд таблицы, в нем начиная со второго столбца идут следующие ячейки:
+    true, false, string, number, object, array, null, undefined, NAN, 0
+    соответственно в таком же порядке делаем и первый столбец
+    3) написать скрипт, который будет приравнивать эти значения друг с другом (==)
+    и выводить в таблицу, в ячейки их пересечения
+    результат сравнения (true/false)-->
+    <style>
+    a {
+        color: #FF0000;
+        font-weight: bold;
+        font-size: larger;
+    }
+    </style>
+</head>
+<body>
+
+
+
+<div>Comparison Table</div>
+<input type="button" value="create table" onclick="table()"/>
+
+<script>
+
+    function createTable(rows, cells) {
+        var table = document.createElement('table');  // создать новый элемент таблицу
+        table.border = 1;
+        for (var i = 0; i < rows; ++i) {  // перебор в строк в цикле
+            var row = document.createElement('tr');  // создание нового элемента строки
+            for (var j = 0; j < cells; ++j) {  // перебор колонок в цикле
+                var cell = document.createElement('td');  // создание новой колонки (по факту ячейки)
+                cell.width="40";
+                cell.height="20";
+                cell.id = "" + i + j;
+                row.appendChild(cell);  // встаить колонку в строку
+            }
+            table.appendChild(row);  // вставить строку в таблицу
+        }
+        return table;
+    }
+
+
+    function table() {
+        var table = createTable(11, 11);
+        document.body.appendChild(table);  // добавить в тело странцы таблицу
+    }
+
+//    2) 1 рядок - хэд таблицы, в нем начиная со второго столбца идут следующие ячейки:
+//    true, false, string, number, object, array, null, undefined, NAN, 0
+//    соответственно в таком же порядке делаем и первый столбец
+
+    var my_nan = Math.sqrt(-1)
+
+    var values = [true, false, "string", 1, {}, [], null, undefined, my_nan, 0];
+
+    var tableType = "==";  // тип проверки по умолчанию
+    var nan = Math.sqrt(-1);
+    var values = [
+        ['true', true],
+        ['false', false],
+        ['"0"', '0'],
+        ['1', 1],
+        ['object', {}],
+        ['array', []],
+        ['null',null],
+        ['undefined', undefined],
+        ['nan', nan],
+        [0, 0]
+    ];
+
+
+    function insertHeader() {
+        // вставить значения для ячеек хедера таблицы
+        for (var i = 0; i < values.length; i++) {
+            document.getElementById("0"+(i+1)).innerHTML=values[i][0];
+        }
+    }
+
+    function insertFirstColumn() {
+        // вставить значения для ячеек первого столбца таблицы
+        for (var i = 1; i < values.length+1; i++) {
+            document.getElementById(i + "0").innerHTML=values[i-1][0];
+        }
+    }
+
+    function changeTableType() {
+        if (document.getElementById("00").innerHTML) { // если есть вид проверки
+            tableType = document.getElementById("00").childNodes[0].innerHTML;  // получить вид проверки и обновить ссылку
+            if (tableType == "==") {
+                document.getElementById("00").childNodes[0].innerHTML = "===";
+            } else if (tableType == "===") {
+                document.getElementById("00").childNodes[0].innerHTML = "==";
+            }
+            checkIntersection();  // при клике на вид проверки - обновить таблицу выполнив проверку
+        } else {  // если нет вила проверки - создать (при создании таблицы)
+            document.getElementById("00").innerHTML = '<a href="#" onclick="changeTableType()" style="text-decoration: none">===</a>';
+        }
+    }
+
+    function populateTable() {
+        changeTableType();
+        insertHeader();
+        insertFirstColumn();
+    }
+
+    function checkIntersection() {
+        for (var i = 1; i < values.length+1; i++) {  // перебор строк таблицы
+            var columnValue = values[i-1][1];  // имя строки (из первого столбца таблицы)
+            for (var j = 1; j < values.length+1; j++) {  // перебор колонок таблицы
+                var headerValue = values[j-1][1];  // имя колонки
+                var intersectionValue = document.getElementById("" + i + j);  // получаем ячейку пересечения
+                if (tableType == "==") {
+                    if (columnValue == headerValue) {  // если имя колонки и имя строки одинаковые
+                        intersectionValue.innerHTML = "<b>true</b>";  // в ячейке пересечения запишем true
+                    } else {
+                        intersectionValue.innerHTML = "false";
+                    }
+                } else if (tableType == "==="){
+                    if (columnValue === headerValue) {  // если имя колонки и имя строки одинаковые
+                        intersectionValue.innerHTML = "<b>true</b>";  // в ячейке пересечения запишем true
+                    } else {
+                        intersectionValue.innerHTML = "false";
+                    }
+                }
+            }
+        }
+    }
+
+    function table() {
+        var table = createTable(11, 11);
+        document.body.appendChild(table);  // добавить в тело странцы таблицу
+        populateTable();
+        checkIntersection();
+    }
+
+</script>
+
+</body>
+</html>

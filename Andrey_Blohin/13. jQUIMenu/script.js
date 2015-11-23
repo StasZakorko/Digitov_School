@@ -1,0 +1,1 @@
+$(document).ready(function(){ $(".menu-color a").click(function(){ $("link").attr("href", $(this).attr("data-theme")) }) });
